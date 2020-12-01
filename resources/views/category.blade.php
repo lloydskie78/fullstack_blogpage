@@ -7,20 +7,15 @@
 				<div class="row">
 					<div class="col-12 col-md-10 col-lg-8">
 						<div class="row">
-							@if (count($categories)>0)
-								@foreach ($categories as $nav)
 									<div class="col-12 col-md-4 col-lg-4">
 									<a href="">
 										<div class="banner_box">
 											<i class="fab fa-laravel"></i>
-											<h3 class="banner_box_h3">{{ $nav->categoryName }}</h3>
-											{{-- <p>The Toptal Blog is the top hub for developers.</p> --}}
+											<h3 class="banner_box_h3">{{ $categoryName }}</h3>
+											<p>The Toptal Blog is the top hub for developers.</p>
 										</div>
 									</a>
 							</div>
-								@endforeach
-							@endif
-							
 						</div>
 					</div>
 				</div>
@@ -37,14 +32,14 @@
 					</div>
 					<div class="row">
 
+
 						@if (count($blogs)>0)
 							@foreach ($blogs as $b)
-
 								<div class="col-12 col-md-6 col-lg-4">
 									<a href="/blog/{{ $b->slug }}">
 										<div class="home_card">
 											<div class="home_card_top">
-												<img src="img/card3.jpg" alt="image">
+												<img src="../../img/card3.jpg" alt="image">
 											</div>
 											<div class="home_card_bottom">
 												<div class="home_card_bottom_text">
@@ -52,13 +47,13 @@
 														<ul class="home_card_bottom_text_ul">
 															@foreach ($b->cat as $c)
 																<li>
-																	<a href="blog_post.html">{{ $c->categoryName }}</a>
+																	<a href="/blog/{{ $b->slug }}">{{ $c->categoryName }}</a>
 																	{{-- <span><i class="fas fa-angle-right"></i></span> --}}
 																</li>
 															@endforeach
 														</ul>
 													@endif
-													<a href="blog_post.html">
+													<a href="/blog/{{ $b->slug }}">
 														<h2 class="home_card_h2">{{ $b->title }}</h2>
 													</a>
 													<p class="post_p">
@@ -66,7 +61,7 @@
 													</p>
 													<div class="home_card_bottom_tym">
 														<div class="home_card_btm_left">
-															<img src="img/man1.jpg" alt="image">
+															<img src="../../img/man1.jpg" alt="image">
 														</div>
 														<div class="home_card_btm_r8">
 														<a href="contact_me.html"><p class="author_name">{{ $b->user->fullName }}</p></a>
@@ -84,10 +79,11 @@
 
 							@endforeach
 						@endif
-					</div>
-					<div class="text-center">
-						<button><a href="/blogs">View all</a></button>
-					</div>
+
+                               
+						
+                    </div>
+                    {!! $blogs->links() !!}
 				</div>
 			</div>
 		</div>
