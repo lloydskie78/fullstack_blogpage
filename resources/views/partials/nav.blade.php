@@ -35,19 +35,7 @@
 									</li>
 								</ul>
 							</div>
-							<div class="menu_srch d-flex">
-								<i class="fas fa-search search_btn"></i>
-								<!-- SEARCH INPUT -->
-								<div class="header_serch dis_none">
-									<div class="header_serch_input">
-										<input type="" name="" placeholder="Search">
-									</div>
-									<div class="header_serch_i">
-										<i class="fas fa-search"></i>
-									</div>
-								</div>
-								<!-- SEARCH INPUT -->
-							</div>
+							<search></search>
 						</div>
 					</div>
 				</div>

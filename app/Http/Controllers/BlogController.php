@@ -68,4 +68,36 @@ class BlogController extends Controller
             ->paginate(1);
         return view('blogs')->with(['blogs' => $blogs]);
     }
+
+    public function search(Request $request)
+    {
+        $str = $request->str;
+        $blogs = Blog::orderBy('id', 'desc')
+            ->with(['cat', 'user'])
+            ->select(['id', 'title', 'post_excerpt', 'slug', 'user_id', 'featuredImage']);
+        $blogs->when($str != '', function ($query) use ($str) {
+            $query->where('title', 'LIKE', "%{$str}%")
+                ->orWhereHas('cat', function ($query) use ($str) {
+                    $query->where('categoryName', $str);
+                })
+                ->orWhereHas('tag', function ($query) use ($str) {
+                    $query->where('tagName', $str);
+                });
+        });
+
+        $blogs = $blogs->paginate(1);
+        $blogs = $blogs->appends($request->all());
+        return view('blogs')->with(['blogs' => $blogs]);
+
+
+
+        // if (!$str) return $blogs->get();
+        // $blogs->where('title', 'LIKE', "%{$str}%")
+        //     ->orWhereHas('cat', function ($query) use ($str) {
+        //         $query->where('categoryName', $str);
+        //     })
+        //     ->orWhereHas('tag', function ($query) use ($str) {
+        //         $query->where('tagName', $str);
+        //     });
+    }
 }
